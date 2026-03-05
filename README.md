@@ -59,6 +59,19 @@ Luckily there are these handy options for [registering an interpreter to run the
 }
 ```
 
+
+**For better integration you can also use the `excalidraw-desktop.nix` file**
+
+```nix
+{ config, lib, pkgs, ... }:
+{
+    environment.systemPackages = [
+        # adjust path as needed
+        (pkgs.callPackage ./packages/excalidraw-desktop.nix {})
+    ];
+}
+```
+
 #### .desktop Entries
 
 Example file (`/home/user/.local/share/applications/excalidraw.desktop`):
