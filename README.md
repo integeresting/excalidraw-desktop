@@ -38,7 +38,7 @@ excalidraw <PATH>
 
 ```bash
 npm run build
-mv release/0.0.0/excalidraw-Linux-0.0.0.AppImage ~/.local/bin/excalidraw
+mv release/<VERSION>/excalidraw-Linux-0.0.0.AppImage ~/.local/bin/excalidraw
 chmod u+x ~/.local/bin/excalidraw
 ```
 

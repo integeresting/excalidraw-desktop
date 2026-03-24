@@ -91,6 +91,7 @@ function App() {
 
         const elements = excalidrawAPI.getSceneElements();
         const appState = excalidrawAPI.getAppState();
+        const files = excalidrawAPI.getFiles();
 
         try {
             const png = await exportToBlob({
@@ -98,9 +99,8 @@ function App() {
                 appState: {
                     ...appState,
                     exportWithDarkMode: theme === "dark",
-                    exportBackground: theme !== "dark",
                 },
-                files: null,
+                files,
                 exportPadding: 20,
             });
             // @ts-expect-error electronApi not in default type
@@ -127,12 +127,13 @@ function App() {
 
         const elements = excalidrawAPI.getSceneElements();
         const appState = excalidrawAPI.getAppState();
+        const files = excalidrawAPI.getFiles();
 
         try {
             const svg = await exportToSvg({
                 elements,
                 appState: { ...appState, exportWithDarkMode: theme === "dark" },
-                files: null,
+                files,
                 exportPadding: 20,
             });
             const svgString = new XMLSerializer().serializeToString(svg);
