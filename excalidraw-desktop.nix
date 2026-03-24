@@ -1,11 +1,12 @@
 { fetchurl, pkgs }:
 let
-	pname = "excalidraw-desktop";
-	version = "0.0.0";
+	pname = "excalidraw";
+	version = "0.1.0";
+	binname = "excalidraw-desktop.AppImage";
 
 	src = fetchurl {
-		url = "https://github.com/45Hnri/excalidraw-desktop/releases/download/v${version}/excalidraw";
-		hash = "sha256:1ce92eefb1a161ced75177d55e32586e590db5107121f885fe304544164816fa";
+		url = "https://github.com/45Hnri/excalidraw-desktop/releases/download/v${version}/${binname}";
+		hash = "sha256-UaTw1VHx9xRuz2HoYGd30i7IYxSSiI7wQpJg+nj4BAM=";
 	};
 
 	appimageContents = pkgs.appimageTools.extract {inherit pname version src;};
@@ -14,7 +15,8 @@ in
 		inherit pname version src;
 		pkgs = pkgs;
 		extraInstallCommands = ''
-				install -m 444 -D ${appimageContents}/${pname}.desktop -t $out/share/applications
+				install -m 444 -D ${appimageContents}/${binname}.desktop -t $out/share/applications
+				mv $out/share/applications/${binname}.desktop $out/share/applications/${pname}.desktop
 				substituteInPlace $out/share/applications/${pname}.desktop \
 					--replace 'Exec=AppRun' 'Exec=${pname}'
 
