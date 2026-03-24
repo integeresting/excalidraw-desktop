@@ -16,6 +16,12 @@ import { ImageDown, Moon, Save, Sun } from "lucide-react";
 import { FooterButton } from "./components/footer-button";
 import { toast, Toaster } from "sonner";
 import { cn, resolvablePromise } from "./lib/utils";
+
+type ElectronApiRes = {
+	success?: string,
+	error?: string,
+}
+
 function App() {
     const initialStatePromiseRef = useRef<{
         promise: ResolvablePromise<ExcalidrawInitialDataState | null>;
@@ -61,13 +67,14 @@ function App() {
 
         const elements = excalidrawAPI.getSceneElements();
         const appState = excalidrawAPI.getAppState();
+        const files = excalidrawAPI.getFiles();
 
         try {
-            const scene = serializeAsJSON(elements, appState, null, "local");
+            const scene = serializeAsJSON(elements, appState, files, "local");
             // @ts-expect-error electronApi not in default type
             window.electronAPI.setFileData(scene);
             // @ts-expect-error electronApi not in default type
-            window.electronAPI.setFileDataReply((response: any) => {
+						window.electronAPI.setFileDataReply((response: ElectronApiRes) => {
                 if (response.success) {
                     toast.success("file saved", { duration: 2500 });
                 } else {
@@ -99,7 +106,7 @@ function App() {
             // @ts-expect-error electronApi not in default type
             window.electronAPI.setImagePngData(await png.arrayBuffer());
             // @ts-expect-error electronApi not in default type
-            window.electronAPI.setImagePngDataReply((response: any) => {
+            window.electronAPI.setImagePngDataReply((response: ElectronApiRes) => {
                 if (response.success) {
                     toast.success("png saved", { duration: 2500 });
                 } else {
@@ -132,7 +139,7 @@ function App() {
             // @ts-expect-error electronApi not in default type
             window.electronAPI.setImageSvgData(svgString);
             // @ts-expect-error electronApi not in default type
-            window.electronAPI.setImageSvgDataReply((response: any) => {
+            window.electronAPI.setImageSvgDataReply((response: ElectronApiRes) => {
                 if (response.success) {
                     toast.success("svg saved", { duration: 2500 });
                 } else {
