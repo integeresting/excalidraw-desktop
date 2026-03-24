@@ -2,10 +2,10 @@
 let
 	pname = "excalidraw";
 	version = "0.1.0";
-	binname = "excalidraw-desktop.AppImage";
+	binname = "excalidraw-desktop";
 
 	src = fetchurl {
-		url = "https://github.com/45Hnri/excalidraw-desktop/releases/download/v${version}/${binname}";
+		url = "https://github.com/45Hnri/excalidraw-desktop/releases/download/v${version}/${binname}.AppImage";
 		hash = "sha256-UaTw1VHx9xRuz2HoYGd30i7IYxSSiI7wQpJg+nj4BAM=";
 	};
 
