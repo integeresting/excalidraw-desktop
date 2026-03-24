@@ -6,7 +6,7 @@ let
 
 	src = fetchurl {
 		url = "https://github.com/45Hnri/excalidraw-desktop/releases/download/v${version}/${binname}.AppImage";
-		hash = "sha256-UaTw1VHx9xRuz2HoYGd30i7IYxSSiI7wQpJg+nj4BAM=";
+		hash = "sha256:0d7484058190dd30f75440471b82c261fe4df36635d600a5e4642fc7ce13d2d4";
 	};
 
 	appimageContents = pkgs.appimageTools.extract {inherit pname version src;};
