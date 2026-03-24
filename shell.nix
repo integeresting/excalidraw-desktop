@@ -27,6 +27,7 @@ let
 	];
 in
 	pkgs.mkShell {
+		packages = [ pkgs.appimage-run ];
 		buildInputs = [ pkgs.nodejs_20 ] ++ libs;
 		shellHook = ''
 		export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH
